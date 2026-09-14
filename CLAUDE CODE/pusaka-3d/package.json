@@ -1,0 +1,22 @@
+{
+  "name": "pusaka-3d",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Pusaka Coffee — 3D Immersive Landing Page (Three.js + GSAP + Lenis + Tailwind)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "lenis": "^1.1.20",
+    "three": "^0.171.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.9",
+    "tailwindcss": "^4.0.9",
+    "vite": "^6.2.0"
+  }
+}

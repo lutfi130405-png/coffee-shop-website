@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0f0f" />
+  <title>Pusaka Coffee — 3D Immersive</title>
+  <meta name="description" content="Pusaka Coffee Roasters — pengalaman 3D immersive. Biji kopi Nusantara, dipanggang di Banjarbaru." />
+</head>
+<body>
+
+  <!-- ================= CANVAS WEBGL (fixed background) ================= -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- lapisan gelap tipis di atas canvas supaya teks selalu terbaca -->
+  <div class="scrim"></div>
+
+  <!-- ================= KONTEN SCROLLABLE ================= -->
+  <main id="scroll-container">
+
+    <!-- ---------- NAV ---------- -->
+    <header class="nav">
+      <a href="#hero" class="nav__brand">PUSAKA <span>Coffee Roasters</span></a>
+      <nav class="nav__links">
+        <a href="#catalog" data-scroll-to>Menu</a>
+        <a href="#reservation" data-scroll-to>Reservasi</a>
+      </nav>
+    </header>
+
+    <!-- ---------- SECTION 1 · HERO ---------- -->
+    <section id="hero" class="section section--hero" data-section="hero">
+      <div class="section__inner">
+        <p class="eyebrow reveal">Est. Banjarbaru — Kalimantan Selatan</p>
+        <h1 class="display reveal">
+          Jiwa Nusantara,<br /><em>diseduh untuk hari ini.</em>
+        </h1>
+        <p class="lead reveal">
+          Sebuah pengalaman kopi 3D yang immersive — dari kebun di dataran tinggi
+          hingga cangkir di tangan Anda, dalam satu benang emas yang menyala.
+        </p>
+        <div class="cta-row reveal">
+          <a href="#reservation" class="btn btn--gold" data-scroll-to>Pesan Meja</a>
+          <a href="#catalog" class="btn btn--ghost" data-scroll-to>Lihat Menu</a>
+        </div>
+      </div>
+      <div class="scroll-hint reveal"><span>Scroll</span></div>
+    </section>
+
+    <!-- ---------- SECTION 2 · CATALOG MENU ---------- -->
+    <section id="catalog" class="section section--catalog" data-section="catalog">
+      <div class="section__inner">
+        <p class="eyebrow reveal">02 — Katalog</p>
+        <h2 class="display display--sm reveal">Menu Signature</h2>
+
+        <ul class="menu-grid">
+          <li class="menu-card reveal">
+            <div class="menu-card__head">
+              <h3>The Batavia Drip</h3><span>IDR 38K</span>
+            </div>
+            <p>Pour-over single origin, bergilir tiap minggu. Bersih, berlapis, tenang.</p>
+          </li>
+          <li class="menu-card reveal">
+            <div class="menu-card__head">
+              <h3>Pusaka Spice Latte</h3><span>IDR 45K</span>
+            </div>
+            <p>Espresso &amp; susu melalui gula aren, kayu manis, dan pala.</p>
+          </li>
+          <li class="menu-card reveal">
+            <div class="menu-card__head">
+              <h3>Kalimantan Cold Drip</h3><span>IDR 40K</span>
+            </div>
+            <p>Ditetes perlahan 12 jam, diistirahatkan semalam. Halus dan manis.</p>
+          </li>
+          <li class="menu-card reveal">
+            <div class="menu-card__head">
+              <h3>Nusantara Espresso Tonic</h3><span>IDR 44K</span>
+            </div>
+            <p>Ristretto ganda di atas tonik rumahan dan jeruk purut. Berlapis, segar.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ---------- SECTION 3 · RESERVATION FORM ---------- -->
+    <section id="reservation" class="section section--reservation" data-section="reservation">
+      <div class="section__inner section__inner--narrow">
+        <p class="eyebrow reveal">03 — Kunjungi</p>
+        <h2 class="display display--sm reveal">Reservasi Meja</h2>
+
+        <form id="reservation-form" class="form reveal" novalidate>
+          <div class="form__row">
+            <label>
+              <span>Nama</span>
+              <input type="text" name="name" autocomplete="name" required placeholder="Nama Anda" />
+            </label>
+          </div>
+          <div class="form__row form__row--split">
+            <label>
+              <span>Tanggal</span>
+              <input type="date" name="date" required />
+            </label>
+            <label>
+              <span>Waktu</span>
+              <input type="time" name="time" value="18:30" required />
+            </label>
+            <label>
+              <span>Tamu</span>
+              <input type="number" name="guests" min="1" max="12" value="2" required />
+            </label>
+          </div>
+          <div class="form__row">
+            <label>
+              <span>Permintaan khusus</span>
+              <textarea name="note" rows="2" placeholder="Anniversary, catatan diet, tasting flight…"></textarea>
+            </label>
+          </div>
+          <p class="form__error" role="alert" hidden></p>
+          <button type="submit" class="btn btn--gold btn--block">Kirim Reservasi</button>
+          <p class="form__hint">Konfirmasi lewat WhatsApp — tombol membuka pesan yang sudah terisi.</p>
+        </form>
+
+        <footer class="footer reveal">
+          <p>Jl. Panglima Batur, Banjarbaru, Kalimantan Selatan</p>
+          <p>Senin — Minggu · 08.00 — 23.00</p>
+          <p>© <span id="year">2026</span> Pusaka Coffee Roasters</p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

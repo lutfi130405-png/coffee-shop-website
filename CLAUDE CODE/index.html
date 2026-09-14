@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pusaka Coffee Roasters — The Soul of the Archipelago</title>
+<meta name="description" content="Pusaka Coffee Roasters — an ultra-luxury Indonesian heritage coffee experience. Single-origin beans, masterful craftsmanship. Jl. Panglima Batur, Banjarbaru, South Kalimantan." />
+<meta name="theme-color" content="#0F0F0F" />
+
+<!-- Google Fonts: Cinzel + Cormorant Garamond (editorial headers) · Plus Jakarta Sans (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Tailwind CSS (CDN) + custom config -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          parchment: '#F5F0EB',
+          charcoal: '#0F0F0F',
+          darkglass: 'rgba(18, 18, 18, 0.75)',
+          gold: '#D4AF37',
+          'warm-gold': '#F3C649',
+        },
+        fontFamily: {
+          name: ['Cinzel', 'Georgia', 'serif'],
+          display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          body: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        },
+        letterSpacing: { widest2: '0.32em' },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root { color-scheme: dark; }
+
+  html, body { max-width: 100%; overflow-x: clip; }
+  body {
+    background: #0F0F0F;
+    color: #F5F0EB;
+    font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Lenis */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  /* Fixed WebGL canvas — home of "The Golden Thread" */
+  #bg-canvas {
+    position: fixed; inset: 0; width: 100%; height: 100%;
+    z-index: 0; pointer-events: none; display: block;
+  }
+  .layer { position: relative; z-index: 1; }
+
+  /* Film grain */
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 60;
+    pointer-events: none; opacity: 0.25; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  section[id] { scroll-margin-top: 96px; }
+
+  /* ---------- Typography helpers ---------- */
+  .h-hero { font-size: clamp(2.4rem, 5.4vw + 0.6rem, 5.4rem); line-height: 1.12; }
+  .h-section { font-size: clamp(2rem, 3.6vw + 0.6rem, 3.9rem); line-height: 1.16; }
+  .h-finale { font-size: clamp(2.4rem, 5vw + 0.6rem, 4.6rem); line-height: 1.12; }
+  .balance { text-wrap: balance; }
+  .text-gold-gradient {
+    color: #D4AF37;
+    background: linear-gradient(100deg, #F3C649 0%, #D4AF37 45%, #a97f22 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .dropcap::first-letter {
+    float: left; font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 3.3em; line-height: 0.82; padding: 0.02em 0.12em 0 0;
+    color: #D4AF37; font-weight: 600;
+  }
+  .glow-text { text-shadow: 0 0 26px rgba(243, 198, 73, 0.45); }
+
+  /* ---------- Glassmorphism ---------- */
+  .glass {
+    background: rgba(255,255,255,0.055);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border: 1px solid rgba(212,175,55,0.22);
+    box-shadow: 0 20px 60px -18px rgba(0,0,0,0.6);
+  }
+  .glass-dark {
+    background: rgba(18,18,18,0.75);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .glass-light {
+    background: rgba(245,240,235,0.82);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border: 1px solid rgba(140,96,70,0.16);
+  }
+  /* Gold-foil border */
+  .foil { position: relative; }
+  .foil::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+    background: linear-gradient(135deg, #F3C649, rgba(212,175,55,0.15) 35%, rgba(212,175,55,0.15) 65%, #F3C649);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Section grounds — translucent so the golden thread stays visible behind them */
+  .ground-dark { background: rgba(15,15,15,0.84); }
+  .ground-light { background: rgba(245,240,235,0.93); color: #0F0F0F; }
+  .ground-void { background: rgba(12,12,12,0.68); }
+
+  /* Menu card surfaces — plain CSS so they never depend on Tailwind JIT
+     picking up classes from JS-injected markup */
+  .menu-surface {
+    background: rgba(255,255,255,0.96);
+    border: 1px solid rgba(15,15,15,0.10);
+    box-shadow: 0 12px 34px -20px rgba(0,0,0,0.35);
+  }
+  .menu-surface:hover { border-color: rgba(212,175,55,0.6); }
+  .bean-bg { background: linear-gradient(135deg, #8C6046 0%, #3a2418 55%, #0F0F0F 100%); }
+  .clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* Text mask reveal — padding gives glyph ascenders/descenders room so overflow:hidden never clips letters */
+  .mask { display: block; overflow: hidden; padding: 0.12em 0.04em; margin: -0.12em -0.04em; }
+  .mask > .mask-i { display: block; will-change: transform; }
+
+  /* Nav */
+  #nav { transition: transform .5s cubic-bezier(.16,1,.3,1); }
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ""; position: absolute; left: 0; bottom: -5px; width: 100%; height: 1px;
+    background: #D4AF37; transform: scaleX(0); transform-origin: right;
+    transition: transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  .nav-link:hover::after, .nav-link:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+
+  #progress { transform: scaleX(0); transform-origin: left; }
+
+  /* Marquee */
+  .marquee { display: flex; gap: 3rem; white-space: nowrap; width: max-content; animation: marquee 36s linear infinite; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* Magnetic + tilt */
+  .magnetic { will-change: transform; }
+  .tilt-card { transform-style: preserve-3d; will-change: transform; }
+  .tilt-card .tilt-layer { transform: translateZ(38px); }
+  .tilt-strong { transform-style: preserve-3d; will-change: transform; }
+  .tilt-strong .tilt-deep { transform: translateZ(60px); }
+
+  /* Buttons */
+  .btn-glow { transition: box-shadow .45s ease, background-color .3s ease, color .3s ease; box-shadow: 0 0 0 rgba(243,198,73,0); }
+  .btn-glow:hover, .btn-glow:focus-visible { box-shadow: 0 0 34px -4px rgba(243,198,73,0.65); }
+
+  /* Menu photo zoom */
+  .zoom-wrap { overflow: hidden; }
+  .zoom-wrap img { transition: transform .8s cubic-bezier(.16,1,.3,1); }
+  .zoom-wrap:hover img, .zoom-wrap:focus-within img { transform: scale(1.09); }
+
+  /* Gallery */
+  .gal-item img { transition: transform .9s cubic-bezier(.16,1,.3,1), filter .5s ease; }
+  .gal-item:hover img { transform: scale(1.06); filter: brightness(1.08) saturate(1.05); }
+  .gal-item::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+    transition: opacity .5s ease;
+    background: radial-gradient(120% 80% at 50% 100%, rgba(243,198,73,0.28), transparent 60%);
+  }
+  .gal-item:hover::after { opacity: 1; }
+
+  /* Craft stage */
+  .stage-btn { transition: color .3s ease, border-color .3s ease; }
+  .stage-btn[aria-selected="true"] { color: #F3C649; border-color: #D4AF37; }
+  .stage-btn[aria-selected="true"] .stage-num { background: #D4AF37; color: #0F0F0F; }
+
+  /* Reservation */
+  .slot-btn[aria-pressed="true"] { background: #D4AF37; color: #0F0F0F; border-color: #D4AF37; }
+  input[type="date"], input[type="time"] { color-scheme: dark; }
+  .ground-light input[type="date"], .ground-light input[type="time"] { color-scheme: light; }
+
+  /* Menu modal — CSS-driven visibility (never depends on a JS animation frame) */
+  #menuModal { opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility .3s; }
+  #menuModal.is-open { opacity: 1; visibility: visible; }
+  #menuModal [role="dialog"] { transform: translateY(28px); transition: transform .45s cubic-bezier(.16,1,.3,1); }
+  #menuModal.is-open [role="dialog"] { transform: none; }
+
+  /* Toast + back-to-top */
+  #toast { transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .4s ease; }
+  #toTop { transition: opacity .4s ease, transform .4s ease; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #F3C649; outline-offset: 3px; border-radius: 3px;
+  }
+
+  .link-underline { background-image: linear-gradient(currentColor,currentColor); background-size: 0% 1px; background-repeat: no-repeat; background-position: left bottom; transition: background-size .4s cubic-bezier(.16,1,.3,1); }
+  .link-underline:hover, .link-underline:focus-visible { background-size: 100% 1px; }
+
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee { animation: none; }
+    .lenis.lenis-smooth { scroll-behavior: smooth !important; }
+    #bg-canvas { display: none; }
+    #menuModal, #menuModal [role="dialog"] { transition: none; }
+  }
+</style>
+</head>
+
+<body class="font-body antialiased selection:bg-gold/30 selection:text-parchment">
+
+  <!-- ============ WEBGL BACKGROUND — THE GOLDEN THREAD ============ -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Scroll progress -->
+  <div class="fixed top-0 inset-x-0 h-[2px] bg-transparent z-[70]">
+    <div id="progress" class="h-full w-full bg-warm-gold"></div>
+  </div>
+
+  <a href="#philosophy" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[80] focus:bg-charcoal focus:text-parchment focus:px-4 focus:py-2 focus:text-sm">Skip to content</a>
+
+  <!-- ============ NAV ============ -->
+  <header id="nav" class="fixed top-4 inset-x-3 md:inset-x-0 z-50">
+    <div class="mx-auto max-w-5xl">
+      <div class="glass rounded-2xl md:rounded-full px-5 md:px-7 py-3 flex items-center justify-between">
+        <a href="#top" class="flex items-center gap-3 text-warm-gold" aria-label="Pusaka Coffee Roasters — home">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="16" cy="18.5" rx="8.5" ry="10.5" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M16 8C11.5 13.5 20.5 22 16 29" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M12.5 2.4c-1.4 1.6 1.4 2.6 0 4.2M19 1.6c-1.4 1.6 1.4 2.6 0 4.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.75"/>
+          </svg>
+          <span class="leading-none text-parchment">
+            <span class="block font-name text-sm tracking-[0.2em]">PUSAKA</span>
+            <span class="block text-[8px] tracking-widest2 uppercase opacity-60">Coffee Roasters</span>
+          </span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-7 text-[12px] uppercase tracking-[0.18em] text-parchment/85">
+          <a href="#philosophy" class="nav-link hover:text-parchment transition-colors">Heritage</a>
+          <a href="#origins" class="nav-link hover:text-parchment transition-colors">Origins</a>
+          <a href="#craft" class="nav-link hover:text-parchment transition-colors">Craft</a>
+          <a href="#menu" class="nav-link hover:text-parchment transition-colors">Menu</a>
+          <a href="#gallery" class="nav-link hover:text-parchment transition-colors">Atmosphere</a>
+        </nav>
+
+        <a href="#visit" class="magnetic hidden sm:inline-flex items-center gap-2 bg-warm-gold text-charcoal text-[11px] uppercase tracking-[0.18em] px-5 py-2.5 rounded-full btn-glow hover:bg-parchment transition-colors">
+          <span class="magnetic-label">Reserve</span>
+        </a>
+
+        <button id="menuToggle" class="md:hidden text-parchment ml-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+        </button>
+      </div>
+
+      <div id="mobileMenu" hidden class="md:hidden mt-2 glass-dark rounded-2xl px-5 py-5">
+        <nav class="flex flex-col gap-4 text-sm uppercase tracking-[0.2em] text-parchment/90">
+          <a href="#philosophy" data-close>Heritage</a>
+          <a href="#origins" data-close>Origins</a>
+          <a href="#craft" data-close>Craft</a>
+          <a href="#menu" data-close>Menu</a>
+          <a href="#gallery" data-close>Atmosphere</a>
+          <a href="#visit" data-close class="text-warm-gold">Reserve a Table</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="layer">
+
+    <!-- ============ SLIDE 1 · HERO ============ -->
+    <section class="hero relative min-h-[100svh] flex items-center overflow-visible">
+      <div class="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-transparent to-charcoal pointer-events-none"></div>
+
+      <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 w-full pt-32 pb-24 grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-10 items-center">
+
+        <!-- LEFT · brand + narrative + CTAs -->
+        <div class="max-w-2xl">
+          <p data-hero class="text-warm-gold text-[11px] md:text-xs uppercase tracking-widest2 mb-6 glow-text">Est. Banjarbaru — South Kalimantan</p>
+
+          <h1 class="font-name font-600 h-hero text-parchment balance">
+            <span class="mask"><span class="mask-i">PUSAKA</span></span>
+            <span class="mask"><span class="mask-i text-gold-gradient">COFFEE ROASTERS</span></span>
+          </h1>
+
+          <p data-hero class="mt-6 font-display italic text-warm-gold/90 text-xl md:text-2xl glow-text">The Soul of the Archipelago, Brewed for Today.</p>
+
+          <p data-hero class="dropcap mt-7 max-w-xl text-parchment/75 text-base md:text-lg leading-relaxed">
+            Experiencing Indonesian heritage through meticulously sourced beans and masterful craftsmanship — a single, continuous thread of gold running from the highland farm to the cup in your hands.
+          </p>
+
+          <div data-hero class="mt-10 flex flex-wrap items-center gap-5">
+            <a href="#visit" class="magnetic btn-glow inline-flex items-center gap-3 bg-warm-gold text-charcoal px-7 py-4 text-[12px] uppercase tracking-[0.2em] rounded-full hover:bg-parchment transition-colors">
+              <span class="magnetic-label">Book Experience</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#origins" class="inline-flex items-center gap-2 border border-parchment/30 text-parchment/90 px-6 py-4 text-[12px] uppercase tracking-[0.2em] rounded-full hover:border-warm-gold hover:text-warm-gold transition-colors">
+              Discover Origins
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT · floating glass product card (3D tilt) -->
+        <div class="lg:justify-self-end w-full max-w-sm mx-auto lg:mx-0" style="perspective: 1200px;">
+          <article data-hero class="tilt-strong foil glass-dark rounded-3xl p-7 relative overflow-hidden">
+            <div class="absolute -top-24 -right-16 w-56 h-56 rounded-full bg-warm-gold/20 blur-3xl pointer-events-none"></div>
+            <div class="tilt-deep relative">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] uppercase tracking-widest2 text-warm-gold">Pusaka Reserve</span>
+                <span class="text-[10px] uppercase tracking-[0.15em] text-parchment/55 border border-parchment/20 rounded-full px-2.5 py-1">Lot 2026</span>
+              </div>
+
+              <h2 class="mt-5 font-display text-3xl leading-tight text-parchment">Reserve Lot <span class="text-gold-gradient">2026</span></h2>
+              <p class="mt-1.5 text-[11px] uppercase tracking-[0.16em] text-parchment/55 flex items-center gap-2">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-warm-gold" aria-hidden="true"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                Banjarbaru, South Kalimantan
+              </p>
+
+              <div class="mt-6 flex items-end gap-3 border-t border-parchment/12 pt-5">
+                <span class="font-display text-5xl text-gold-gradient leading-none">98</span>
+                <span class="text-parchment/55 text-sm pb-1">/ 100 &nbsp;Specialty Score</span>
+              </div>
+
+              <dl class="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                <div><dt class="text-[10px] uppercase tracking-[0.14em] text-parchment/45">Altitude</dt><dd class="text-parchment/85">1,420 masl</dd></div>
+                <div><dt class="text-[10px] uppercase tracking-[0.14em] text-parchment/45">Process</dt><dd class="text-parchment/85">Anaerobic Honey</dd></div>
+                <div><dt class="text-[10px] uppercase tracking-[0.14em] text-parchment/45">Roast</dt><dd class="text-parchment/85">Medium-Light</dd></div>
+                <div><dt class="text-[10px] uppercase tracking-[0.14em] text-parchment/45">Harvest</dt><dd class="text-parchment/85">Micro-lot · 60kg</dd></div>
+              </dl>
+
+              <a href="#menu" class="magnetic btn-glow mt-7 w-full inline-flex items-center justify-center gap-2 bg-warm-gold text-charcoal px-6 py-3.5 text-[11px] uppercase tracking-[0.2em] rounded-full hover:bg-parchment transition-colors">
+                <span class="magnetic-label">Explore Reserve</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div data-hero class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-parchment/45">
+        <span class="text-[10px] uppercase tracking-widest2">Follow the thread</span>
+        <span class="block h-10 w-px bg-parchment/25 overflow-hidden"><span class="block h-4 w-full bg-warm-gold animate-bounce"></span></span>
+      </div>
+    </section>
+
+    <!-- Ribbon -->
+    <div class="ground-dark py-4 overflow-hidden border-y border-parchment/10" aria-hidden="true">
+      <div class="marquee text-[11px] uppercase tracking-widest2 text-parchment/70">
+        <span class="flex gap-12"><span>The Golden Thread</span><span class="text-warm-gold">✦</span><span>Roasted in Banjarbaru</span><span class="text-warm-gold">✦</span><span>Single Origin Nusantara</span><span class="text-warm-gold">✦</span><span>Direct Trade</span><span class="text-warm-gold">✦</span></span>
+        <span class="flex gap-12"><span>The Golden Thread</span><span class="text-warm-gold">✦</span><span>Roasted in Banjarbaru</span><span class="text-warm-gold">✦</span><span>Single Origin Nusantara</span><span class="text-warm-gold">✦</span><span>Direct Trade</span><span class="text-warm-gold">✦</span></span>
+      </div>
+    </div>
+
+    <!-- ============ SLIDE 2 · PHILOSOPHY & HERITAGE ============ -->
+    <section id="philosophy" class="ground-light py-24 md:py-36 overflow-hidden">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <p data-reveal class="text-gold text-[11px] uppercase tracking-widest2 flex items-center gap-3">
+          <span class="inline-block w-8 h-px bg-gold"></span> 02 — Heritage
+        </p>
+
+        <div class="mt-10 grid lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+
+          <!-- LEFT · editorial narrative -->
+          <div>
+            <h2 class="font-display h-section text-charcoal tracking-tight">
+              <span class="mask"><span class="mask-i">Rooted in Tradition.</span></span>
+              <span class="mask"><span class="mask-i italic text-gold-gradient">Crafted for the Modern Palate.</span></span>
+            </h2>
+
+            <blockquote class="mt-10 border-l-2 border-gold pl-6 max-w-xl">
+              <p class="font-display text-2xl md:text-[1.7rem] leading-relaxed text-charcoal/80">
+                <span class="mask"><span class="mask-i">We travel across the islands of Indonesia to bring you</span></span>
+                <span class="mask"><span class="mask-i"><em class="not-italic text-gold-gradient font-600">ethically sourced beans</em>, honoring the generations</span></span>
+                <span class="mask"><span class="mask-i">of farmers who cultivate our nation's <em class="not-italic text-gold-gradient font-600">rich soil</em>.</span></span>
+              </p>
+            </blockquote>
+
+            <p data-reveal class="mt-8 text-charcoal/60 leading-relaxed max-w-lg tracking-wide">
+              Every lot is traced to a single village, a single elevation, a single harvest window — then roasted in small batches so the character of the land arrives intact.
+            </p>
+          </div>
+
+          <!-- RIGHT · luxury stat badges -->
+          <dl class="grid gap-5">
+            <div data-reveal class="foil glass-light rounded-2xl px-7 py-6 flex items-center justify-between">
+              <div>
+                <dt class="font-display text-5xl text-gold-gradient counter" data-count="17000" data-suffix="+" data-comma="true">0</dt>
+                <dd class="mt-1 text-[11px] uppercase tracking-[0.16em] text-charcoal/55">Islands, one heritage</dd>
+              </div>
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" class="text-gold" aria-hidden="true"><path d="M3 12c3-4 6-4 9 0s6 4 9 0"/><path d="M3 17c3-4 6-4 9 0s6 4 9 0"/></svg>
+            </div>
+            <div data-reveal class="foil glass-light rounded-2xl px-7 py-6 flex items-center justify-between">
+              <div>
+                <dt class="font-display text-5xl text-gold-gradient counter" data-count="6" data-suffix="">0</dt>
+                <dd class="mt-1 text-[11px] uppercase tracking-[0.16em] text-charcoal/55">Curated micro-lots</dd>
+              </div>
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" class="text-gold" aria-hidden="true"><path d="M12 3v18M4 8l8 4 8-4"/></svg>
+            </div>
+            <div data-reveal class="foil glass-light rounded-2xl px-7 py-6 flex items-center justify-between">
+              <div>
+                <dt class="font-display text-5xl text-gold-gradient counter" data-count="100" data-suffix="%">0</dt>
+                <dd class="mt-1 text-[11px] uppercase tracking-[0.16em] text-charcoal/55">Direct-trade beans</dd>
+              </div>
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" class="text-gold" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Heritage film -->
+        <figure class="mt-16 md:mt-24 relative overflow-hidden rounded-sm h-[46vh] md:h-[72vh] bean-bg">
+          <video
+            data-parallax-img data-speed="10"
+            class="absolute inset-0 w-full h-[124%] -top-[12%] object-cover"
+            src="pusaka-heritage.mp4"
+            autoplay muted loop playsinline preload="metadata"
+            aria-label="Film of the Pusaka coffee house in Banjarbaru">
+          </video>
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/10 to-transparent"></div>
+          <figcaption class="absolute bottom-4 left-5 text-[11px] uppercase tracking-[0.15em] text-parchment/85">The Pusaka house — Jl. Panglima Batur, Banjarbaru</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 3 · ORIGINS OF NUSANTARA ============ -->
+    <section id="origins" class="ground-void text-parchment py-24 md:py-36 overflow-hidden">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <p data-reveal class="text-warm-gold text-[11px] uppercase tracking-widest2 flex items-center gap-3">
+              <span class="inline-block w-8 h-px bg-warm-gold"></span> 03 — Origins
+            </p>
+            <h2 data-reveal class="mt-5 font-display h-section text-parchment">Origins of Nusantara</h2>
+          </div>
+          <p data-reveal class="max-w-sm text-parchment/70 leading-relaxed font-display text-xl">Four islands, four distinct expressions of terroir — each roasted to reveal its truest character.</p>
+        </div>
+
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5" style="perspective: 1100px;">
+          <article data-origin class="tilt-card foil glass rounded-2xl p-7 min-h-[300px] flex flex-col">
+            <div class="tilt-layer flex flex-col h-full">
+              <span class="font-display text-warm-gold/70 text-lg">01</span>
+              <h3 class="mt-4 font-display text-2xl leading-tight text-parchment">Sumatra Gayo</h3>
+              <p class="mt-1 text-[11px] uppercase tracking-[0.15em] text-warm-gold">Aceh Highlands</p>
+              <p class="mt-auto pt-6 text-parchment/75 text-sm leading-relaxed">Bold, earthy, dark chocolate, spice.</p>
+            </div>
+          </article>
+          <article data-origin class="tilt-card foil glass rounded-2xl p-7 min-h-[300px] flex flex-col">
+            <div class="tilt-layer flex flex-col h-full">
+              <span class="font-display text-warm-gold/70 text-lg">02</span>
+              <h3 class="mt-4 font-display text-2xl leading-tight text-parchment">Toraja Sapan</h3>
+              <p class="mt-1 text-[11px] uppercase tracking-[0.15em] text-warm-gold">Sulawesi</p>
+              <p class="mt-auto pt-6 text-parchment/75 text-sm leading-relaxed">Well-balanced, full-bodied, ripe fruit, caramel.</p>
+            </div>
+          </article>
+          <article data-origin class="tilt-card foil glass rounded-2xl p-7 min-h-[300px] flex flex-col">
+            <div class="tilt-layer flex flex-col h-full">
+              <span class="font-display text-warm-gold/70 text-lg">03</span>
+              <h3 class="mt-4 font-display text-2xl leading-tight text-parchment">Bali Kintamani</h3>
+              <p class="mt-1 text-[11px] uppercase tracking-[0.15em] text-warm-gold">Mount Batur</p>
+              <p class="mt-auto pt-6 text-parchment/75 text-sm leading-relaxed">Bright, vibrant, clean citrus acidity.</p>
+            </div>
+          </article>
+          <article data-origin class="tilt-card foil glass rounded-2xl p-7 min-h-[300px] flex flex-col">
+            <div class="tilt-layer flex flex-col h-full">
+              <span class="font-display text-warm-gold/70 text-lg">04</span>
+              <h3 class="mt-4 font-display text-2xl leading-tight text-parchment">Flores Bajawa</h3>
+              <p class="mt-1 text-[11px] uppercase tracking-[0.15em] text-warm-gold">Ngada, East Nusa Tenggara</p>
+              <p class="mt-auto pt-6 text-parchment/75 text-sm leading-relaxed">Sweet, floral, nutty undertones.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 4 · CRAFTSMANSHIP & ROAST PROCESS ============ -->
+    <section id="craft" class="ground-dark py-24 md:py-36 overflow-hidden">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <p data-reveal class="text-warm-gold text-[11px] uppercase tracking-widest2 flex items-center gap-3">
+          <span class="inline-block w-8 h-px bg-warm-gold"></span> 04 — The Craft
+        </p>
+        <h2 data-reveal class="mt-5 font-display h-section text-parchment">From Green Bean to Sacred Pour</h2>
+
+        <div class="mt-14 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div class="order-2 lg:order-1">
+            <div id="stageTabs" role="tablist" aria-label="Roasting stages" class="flex flex-col divide-y divide-parchment/10 border-y border-parchment/10">
+              <button role="tab" id="stab-0" aria-controls="stagePanel" aria-selected="true" class="stage-btn text-left py-6 flex items-start gap-5 border-l-2 border-transparent pl-5 text-parchment/60"
+                data-title="Green Bean Selection"
+                data-desc="We hand-select each lot at origin, cupping green samples for density, moisture and defect count before a single kilogram travels to Kalimantan."
+                data-img="https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=1400&q=80">
+                <span class="stage-num shrink-0 w-9 h-9 rounded-full border border-current grid place-items-center font-display text-sm">01</span>
+                <span><span class="block font-display text-2xl">Green Bean Selection</span><span class="block text-xs uppercase tracking-[0.14em] mt-1 opacity-70">Sourcing</span></span>
+              </button>
+              <button role="tab" id="stab-1" aria-controls="stagePanel" aria-selected="false" tabindex="-1" class="stage-btn text-left py-6 flex items-start gap-5 border-l-2 border-transparent pl-5 text-parchment/60"
+                data-title="Precision Roasting"
+                data-desc="Small 12kg batches roasted on a modified drum roaster. Every curve of the roast profile is logged, so the cup you drink today tastes exactly like the one from last month."
+                data-img="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1400&q=80">
+                <span class="stage-num shrink-0 w-9 h-9 rounded-full border border-current grid place-items-center font-display text-sm">02</span>
+                <span><span class="block font-display text-2xl">Precision Roasting</span><span class="block text-xs uppercase tracking-[0.14em] mt-1 opacity-70">Fire &amp; time</span></span>
+              </button>
+              <button role="tab" id="stab-2" aria-controls="stagePanel" aria-selected="false" tabindex="-1" class="stage-btn text-left py-6 flex items-start gap-5 border-l-2 border-transparent pl-5 text-parchment/60"
+                data-title="Master Cupping"
+                data-desc="Each roast batch is cupped blind by three tasters against a reference score. Anything below 84 points never reaches the bar — it is returned to the roaster or set aside."
+                data-img="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80">
+                <span class="stage-num shrink-0 w-9 h-9 rounded-full border border-current grid place-items-center font-display text-sm">03</span>
+                <span><span class="block font-display text-2xl">Master Cupping</span><span class="block text-xs uppercase tracking-[0.14em] mt-1 opacity-70">The table</span></span>
+              </button>
+              <button role="tab" id="stab-3" aria-controls="stagePanel" aria-selected="false" tabindex="-1" class="stage-btn text-left py-6 flex items-start gap-5 border-l-2 border-transparent pl-5 text-parchment/60"
+                data-title="Sacred Pour"
+                data-desc="At the bar, our head barista finishes every manual brew by hand — a slow, deliberate pour that coaxes clarity and sweetness from the grounds into warmed porcelain."
+                data-img="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1400&q=80">
+                <span class="stage-num shrink-0 w-9 h-9 rounded-full border border-current grid place-items-center font-display text-sm">04</span>
+                <span><span class="block font-display text-2xl">Sacred Pour</span><span class="block text-xs uppercase tracking-[0.14em] mt-1 opacity-70">The cup</span></span>
+              </button>
+            </div>
+          </div>
+
+          <div id="stagePanel" role="tabpanel" aria-labelledby="stab-0" class="order-1 lg:order-2">
+            <div class="foil glass rounded-2xl overflow-hidden">
+              <div class="relative h-[42vh] md:h-[52vh] bean-bg overflow-hidden">
+                <img id="stageImg" src="https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=1400&q=80" alt="Green coffee beans being selected" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.opacity=0" />
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/75 to-transparent"></div>
+              </div>
+              <div class="p-7">
+                <h3 id="stageTitle" class="font-display text-3xl text-parchment">Green Bean Selection</h3>
+                <p id="stageDesc" class="mt-3 text-parchment/75 leading-relaxed">We hand-select each lot at origin, cupping green samples for density, moisture and defect count before a single kilogram travels to Kalimantan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 5 · SIGNATURE MENU (3x3) ============ -->
+    <section id="menu" class="ground-light py-24 md:py-36 overflow-hidden">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <p data-reveal class="text-gold text-[11px] uppercase tracking-widest2 flex items-center gap-3">
+              <span class="inline-block w-8 h-px bg-gold"></span> 05 — The Bar
+            </p>
+            <h2 data-reveal class="mt-5 font-display h-section text-charcoal">Signature Menu</h2>
+          </div>
+          <div id="menuTabs" class="flex flex-wrap gap-2" role="tablist" aria-label="Menu categories">
+            <button class="cat-btn text-[11px] uppercase tracking-[0.14em] px-4 py-2 rounded-full border border-charcoal/20 text-charcoal/70 data-[active=true]:bg-charcoal data-[active=true]:text-parchment data-[active=true]:border-charcoal transition-colors" data-cat="All" data-active="true">All</button>
+            <button class="cat-btn text-[11px] uppercase tracking-[0.14em] px-4 py-2 rounded-full border border-charcoal/20 text-charcoal/70 data-[active=true]:bg-charcoal data-[active=true]:text-parchment data-[active=true]:border-charcoal transition-colors" data-cat="Espresso Bar">Espresso Bar</button>
+            <button class="cat-btn text-[11px] uppercase tracking-[0.14em] px-4 py-2 rounded-full border border-charcoal/20 text-charcoal/70 data-[active=true]:bg-charcoal data-[active=true]:text-parchment data-[active=true]:border-charcoal transition-colors" data-cat="Manual Brew">Manual Brew</button>
+            <button class="cat-btn text-[11px] uppercase tracking-[0.14em] px-4 py-2 rounded-full border border-charcoal/20 text-charcoal/70 data-[active=true]:bg-charcoal data-[active=true]:text-parchment data-[active=true]:border-charcoal transition-colors" data-cat="Signature Mocktails">Signature Mocktails</button>
+          </div>
+        </div>
+
+        <ul id="menuGrid" class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></ul>
+        <p class="mt-6 text-[11px] uppercase tracking-[0.15em] text-charcoal/45">Prices in IDR. Full seasonal menu available in-house.</p>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 6 · ATMOSPHERE & GALLERY MOSAIC ============ -->
+    <section id="gallery" class="ground-dark py-24 md:py-36 overflow-hidden">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <p data-reveal class="text-warm-gold text-[11px] uppercase tracking-widest2 flex items-center gap-3">
+          <span class="inline-block w-8 h-px bg-warm-gold"></span> 06 — Atmosphere
+        </p>
+        <h2 data-reveal class="mt-5 font-display h-section text-parchment">A Room That Slows You Down</h2>
+
+        <div class="mt-14 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          <figure class="gal-item relative overflow-hidden rounded-lg h-[40vh] md:h-[64vh] md:row-span-2 bean-bg">
+            <img data-parallax-img data-speed="10" class="absolute inset-0 w-full h-[122%] -top-[11%] object-cover" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1400&q=80" alt="Barista's hand guiding a slow pour-over" loading="lazy" onerror="this.style.opacity=0" />
+            <figcaption class="absolute bottom-4 left-4 font-display text-warm-gold text-lg glow-text">The pour</figcaption>
+          </figure>
+          <figure class="gal-item relative overflow-hidden rounded-lg h-[30vh] md:h-[31vh] bean-bg">
+            <img data-parallax-img data-speed="18" class="absolute inset-0 w-full h-[130%] -top-[15%] object-cover" src="https://images.unsplash.com/photo-1521302080334-4bebac2763a6?auto=format&fit=crop&w=1000&q=80" alt="Polished espresso machine catching warm light" loading="lazy" onerror="this.style.opacity=0" />
+            <figcaption class="absolute bottom-3 left-4 font-display text-warm-gold text-base glow-text">Machined in brass</figcaption>
+          </figure>
+          <figure class="gal-item relative overflow-hidden rounded-lg h-[30vh] md:h-[31vh] bean-bg">
+            <img data-parallax-img data-speed="13" class="absolute inset-0 w-full h-[130%] -top-[15%] object-cover" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=1000&q=80" alt="Warm interior lighting over a quiet table" loading="lazy" onerror="this.style.opacity=0" />
+            <figcaption class="absolute bottom-3 left-4 font-display text-warm-gold text-base glow-text">Golden hour</figcaption>
+          </figure>
+          <figure class="gal-item relative overflow-hidden rounded-lg h-[30vh] md:h-[31vh] bean-bg">
+            <img data-parallax-img data-speed="20" class="absolute inset-0 w-full h-[132%] -top-[16%] object-cover" src="https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=1000&q=80" alt="Raw green coffee beans before roasting" loading="lazy" onerror="this.style.opacity=0" />
+            <figcaption class="absolute bottom-3 left-4 font-display text-warm-gold text-base glow-text">Raw harvest</figcaption>
+          </figure>
+          <figure class="gal-item relative overflow-hidden rounded-lg h-[30vh] md:h-[31vh] bean-bg">
+            <img data-parallax-img data-speed="9" class="absolute inset-0 w-full h-[128%] -top-[14%] object-cover" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1000&q=80" alt="Smoke rising from freshly roasted beans" loading="lazy" onerror="this.style.opacity=0" />
+            <figcaption class="absolute bottom-3 left-4 font-display text-warm-gold text-base glow-text">First crack</figcaption>
+          </figure>
+          <figure class="gal-item relative overflow-hidden rounded-lg h-[30vh] md:h-[31vh] md:col-span-1 bean-bg">
+            <img data-parallax-img data-speed="16" class="absolute inset-0 w-full h-[126%] -top-[13%] object-cover" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=80" alt="A considered coffee service on a dark table" loading="lazy" onerror="this.style.opacity=0" />
+            <figcaption class="absolute bottom-3 left-4 font-display text-warm-gold text-base glow-text">The Reserve service</figcaption>
+          </figure>
+
+          <!-- editorial panel — fills the bottom row of the mosaic -->
+          <div data-reveal class="col-span-2 md:col-span-2 foil glass-dark rounded-lg p-7 md:p-10 flex flex-col justify-center relative overflow-hidden">
+            <div class="absolute -bottom-24 -right-16 w-64 h-64 rounded-full bg-warm-gold/10 blur-3xl pointer-events-none"></div>
+            <span class="text-[10px] uppercase tracking-widest2 text-warm-gold">The Pusaka room</span>
+            <p class="mt-4 font-display text-2xl md:text-[2rem] leading-snug text-parchment">
+              A cup of coffee is a small ceremony — <span class="italic text-gold-gradient">we simply give it the room it deserves.</span>
+            </p>
+            <p class="mt-4 text-sm text-parchment/60 leading-relaxed max-w-md">
+              Timber, low light and slow music on rotation. No rush, no queue-and-go — a place built for the second cup.
+            </p>
+            <div class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.14em] text-parchment/55">
+              <span><span class="text-warm-gold font-display text-base mr-1.5">32</span> seats</span>
+              <span><span class="text-warm-gold font-display text-base mr-1.5">7h</span> of north light</span>
+              <span><span class="text-warm-gold font-display text-base mr-1.5">120+</span> records on the shelf</span>
+            </div>
+            <a href="#visit" class="magnetic btn-glow mt-8 self-start inline-flex items-center gap-3 bg-warm-gold text-charcoal px-6 py-3 text-[11px] uppercase tracking-[0.2em] rounded-full hover:bg-parchment transition-colors">
+              <span class="magnetic-label">Reserve the room</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 7 · VISIT, RESERVATION & FOOTER ============ -->
+    <footer id="visit" class="ground-void text-parchment pt-24 md:pt-36 overflow-hidden">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <p data-reveal class="text-warm-gold text-[11px] uppercase tracking-widest2 flex items-center gap-3">
+          <span class="inline-block w-8 h-px bg-warm-gold"></span> 07 — Visit
+        </p>
+        <h2 data-reveal class="mt-6 font-display h-finale max-w-4xl">
+          Reserve your seat at the <span class="text-gold-gradient italic">golden thread's</span> end.
+        </h2>
+
+        <div class="mt-16 grid lg:grid-cols-2 gap-12 lg:gap-16">
+
+          <!-- VIP reservation card -->
+          <form id="reserveForm" class="foil glass-dark rounded-2xl p-7 md:p-9" novalidate>
+            <h3 class="font-display text-3xl text-parchment">Private Table Reservation</h3>
+            <p class="mt-2 text-sm text-parchment/65">We hold your table for 15 minutes past the reserved time.</p>
+
+            <div class="mt-7 space-y-6">
+              <div>
+                <label for="rname" class="block text-[11px] uppercase tracking-[0.16em] text-parchment/60 mb-2">Name</label>
+                <input id="rname" name="name" type="text" autocomplete="name" required placeholder="Your name"
+                  class="w-full bg-transparent border border-parchment/25 rounded-lg px-4 py-3 text-parchment placeholder:text-parchment/35 focus:border-warm-gold outline-none transition-colors" />
+              </div>
+
+              <div class="grid sm:grid-cols-3 gap-4">
+                <div>
+                  <label for="rdate" class="block text-[11px] uppercase tracking-[0.16em] text-parchment/60 mb-2">Date</label>
+                  <input id="rdate" name="date" type="date" required
+                    class="w-full bg-transparent border border-parchment/25 rounded-lg px-4 py-3 text-parchment focus:border-warm-gold outline-none transition-colors" />
+                </div>
+                <div>
+                  <label for="rtime" class="block text-[11px] uppercase tracking-[0.16em] text-parchment/60 mb-2">Time</label>
+                  <input id="rtime" name="time" type="time" value="18:30" required
+                    class="w-full bg-transparent border border-parchment/25 rounded-lg px-4 py-3 text-parchment focus:border-warm-gold outline-none transition-colors" />
+                </div>
+                <div>
+                  <span class="block text-[11px] uppercase tracking-[0.16em] text-parchment/60 mb-2">Guests</span>
+                  <div class="flex items-center border border-parchment/25 rounded-lg overflow-hidden">
+                    <button type="button" id="guestMinus" aria-label="Decrease guests" class="px-3 py-3 text-parchment/80 hover:bg-parchment/10 transition-colors">−</button>
+                    <output id="guestCount" class="flex-1 text-center font-display text-lg text-parchment" aria-live="polite">2</output>
+                    <button type="button" id="guestPlus" aria-label="Increase guests" class="px-3 py-3 text-parchment/80 hover:bg-parchment/10 transition-colors">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <span class="block text-[11px] uppercase tracking-[0.16em] text-parchment/60 mb-2">Preferred seating</span>
+                <div id="slotGroup" class="flex flex-wrap gap-2" role="group" aria-label="Preferred seating">
+                  <button type="button" class="slot-btn text-sm px-4 py-2 rounded-lg border border-parchment/25 text-parchment/80 transition-colors" aria-pressed="true">Bar counter</button>
+                  <button type="button" class="slot-btn text-sm px-4 py-2 rounded-lg border border-parchment/25 text-parchment/80 transition-colors" aria-pressed="false">Window</button>
+                  <button type="button" class="slot-btn text-sm px-4 py-2 rounded-lg border border-parchment/25 text-parchment/80 transition-colors" aria-pressed="false">Private nook</button>
+                </div>
+              </div>
+
+              <div>
+                <label for="rnote" class="block text-[11px] uppercase tracking-[0.16em] text-parchment/60 mb-2">Special request</label>
+                <textarea id="rnote" name="note" rows="2" placeholder="Anniversary, dietary notes, tasting flight…"
+                  class="w-full bg-transparent border border-parchment/25 rounded-lg px-4 py-3 text-parchment placeholder:text-parchment/35 focus:border-warm-gold outline-none transition-colors resize-none"></textarea>
+              </div>
+
+              <p id="reserveError" class="text-sm text-warm-gold" role="alert" hidden></p>
+
+              <button type="submit" class="magnetic btn-glow w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-warm-gold text-charcoal px-8 py-4 text-[12px] uppercase tracking-[0.2em] rounded-full hover:bg-parchment transition-colors">
+                <span class="magnetic-label">Reserve Private Table</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+              <p class="text-xs text-parchment/50">Confirmation is completed over WhatsApp — the button opens a pre-filled message you send yourself.</p>
+            </div>
+          </form>
+
+          <!-- Details -->
+          <div class="grid sm:grid-cols-2 gap-10 content-start">
+            <div data-reveal>
+              <h3 class="text-[11px] uppercase tracking-widest2 text-parchment/50">Location</h3>
+              <p class="mt-4 font-display text-2xl leading-snug">Jl. Panglima Batur,<br />Banjarbaru, South Kalimantan.</p>
+              <a href="https://maps.google.com/?q=Jl.+Panglima+Batur,+Banjarbaru,+South+Kalimantan" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-2 text-sm text-warm-gold link-underline">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                Get directions
+              </a>
+            </div>
+            <div data-reveal>
+              <h3 class="text-[11px] uppercase tracking-widest2 text-parchment/50">Hours</h3>
+              <p class="mt-4 font-display text-2xl leading-snug">Monday — Sunday</p>
+              <p class="text-parchment/70">08:00 AM — 11:00 PM</p>
+            </div>
+            <div data-reveal>
+              <h3 class="text-[11px] uppercase tracking-widest2 text-parchment/50">Connect</h3>
+              <p class="mt-4"><a href="https://instagram.com/pusakaroasters" target="_blank" rel="noopener" class="font-display text-2xl link-underline">@pusakaroasters</a></p>
+              <p class="mt-2"><a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="text-parchment/70 link-underline">WhatsApp: +62 812-3456-7890</a></p>
+            </div>
+            <div data-reveal>
+              <h3 class="text-[11px] uppercase tracking-widest2 text-parchment/50">The Cup</h3>
+              <p class="mt-4 text-parchment/70 leading-relaxed">Single-origin coffee, roasted in-house, poured by hand.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-24 flex flex-col md:flex-row md:items-center md:justify-between gap-8 border-t border-parchment/15 py-10">
+          <div class="flex items-center gap-4 text-warm-gold">
+            <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <ellipse cx="16" cy="18.5" rx="8.5" ry="10.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M16 8C11.5 13.5 20.5 22 16 29" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M12.5 2.4c-1.4 1.6 1.4 2.6 0 4.2M19 1.6c-1.4 1.6 1.4 2.6 0 4.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.75"/>
+            </svg>
+            <span class="font-name text-xl tracking-[0.2em] text-parchment">PUSAKA</span>
+          </div>
+          <div class="flex items-center gap-6 text-[11px] uppercase tracking-[0.15em] text-parchment/45">
+            <a href="https://instagram.com/pusakaroasters" target="_blank" rel="noopener" class="hover:text-warm-gold transition-colors">Instagram</a>
+            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="hover:text-warm-gold transition-colors">WhatsApp</a>
+            <button type="button" id="backTop" class="magnetic hover:text-warm-gold transition-colors">Back to top ↑</button>
+          </div>
+          <p class="text-[11px] uppercase tracking-[0.15em] text-parchment/45">© <span id="year">2026</span> Pusaka Coffee Roasters</p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ============ MENU DETAIL MODAL ============ -->
+  <div id="menuModal" aria-hidden="true" class="fixed inset-0 z-[90] flex items-end sm:items-center justify-center p-0 sm:p-6">
+    <div id="modalBackdrop" class="absolute inset-0 bg-charcoal/80 backdrop-blur-sm"></div>
+    <div role="dialog" aria-modal="true" aria-labelledby="modalTitle" class="foil glass-dark relative w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl overflow-hidden">
+      <div class="relative h-56 sm:h-64 bean-bg overflow-hidden">
+        <svg class="absolute inset-0 m-auto w-20 h-20 opacity-30 text-warm-gold pointer-events-none" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+          <ellipse cx="16" cy="16" rx="8.5" ry="11"/><path d="M16 5C11.5 11 20.5 21 16 27" stroke-linecap="round"/>
+        </svg>
+        <img id="modalImg" src="" alt="" class="relative w-full h-full object-cover" onerror="this.style.opacity=0" onload="this.style.opacity=1" />
+        <button id="modalClose" class="absolute top-3 right-3 z-10 glass rounded-full w-9 h-9 grid place-items-center text-parchment hover:bg-warm-gold hover:text-charcoal transition-colors" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="p-7">
+        <p id="modalCat" class="text-[11px] uppercase tracking-[0.15em] text-warm-gold"></p>
+        <h3 id="modalTitle" class="mt-2 font-display text-3xl text-parchment"></h3>
+        <p id="modalDesc" class="mt-3 text-parchment/75 leading-relaxed"></p>
+        <div class="mt-5 flex items-center justify-between border-t border-parchment/10 pt-4">
+          <span id="modalNotes" class="text-xs uppercase tracking-[0.14em] text-parchment/55"></span>
+          <span id="modalPrice" class="font-display text-2xl text-gold-gradient"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-24 opacity-0 z-[95] glass-dark text-parchment text-sm px-5 py-3 rounded-full" role="status" aria-live="polite"></div>
+
+  <!-- Back to top (floating) -->
+  <button id="toTop" type="button" class="magnetic btn-glow fixed bottom-6 right-6 z-[85] w-12 h-12 rounded-full glass-dark text-warm-gold grid place-items-center opacity-0 translate-y-4 pointer-events-none" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </button>
+
+  <!-- ============ LIBRARIES ============ -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var doc = document;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+    doc.getElementById('year').textContent = new Date().getFullYear();
+
+    /* Heritage film — respect reduced motion, and only play while on screen */
+    (function () {
+      var vid = doc.querySelector('#philosophy video');
+      if (!vid) return;
+      if (reduce) { vid.removeAttribute('autoplay'); vid.pause(); return; }
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) { var p = vid.play(); if (p && p.catch) p.catch(function () {}); }
+            else vid.pause();
+          });
+        }, { threshold: 0.15 }).observe(vid);
+      }
+    })();
+
+    /* ============================================================
+       MENU DATA (9 items — fills a 3x3 grid) + RENDER
+    ============================================================ */
+    var MENU = [
+      { title: 'The Batavia Drip', cat: 'Manual Brew', price: 'IDR 38K', notes: 'Black · 220ml',
+        desc: 'A single-origin pour-over rotating weekly across our island lots — clean, layered and unhurried, served black in warmed porcelain.',
+        img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1100&q=80' },
+      { title: 'Pusaka Spice Latte', cat: 'Espresso Bar', price: 'IDR 45K', notes: 'Milk · 240ml',
+        desc: 'Espresso and steamed milk drawn through palm sugar, cinnamon and nutmeg — a quiet tribute to the spice routes that shaped the archipelago.',
+        img: 'https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&w=1100&q=80' },
+      { title: 'Archipelago Cascara', cat: 'Signature Mocktails', price: 'IDR 42K', notes: 'Sparkling · 300ml',
+        desc: 'A sparkling infusion of dried coffee cherry — lightly sweet, with notes of hibiscus and dried mango. Caffeine-light and endlessly refreshing.',
+        img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1100&q=80' },
+      { title: 'Kalimantan Cold Drip', cat: 'Manual Brew', price: 'IDR 40K', notes: 'Cold · 12-hour · 200ml',
+        desc: 'Slow-dripped over twelve hours through a glass tower, then rested overnight. Silky, low-acidity and deeply sweet — poured over a single clear ice sphere.',
+        img: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=1100&q=80' },
+      { title: 'Nusantara Espresso Tonic', cat: 'Signature Mocktails', price: 'IDR 44K', notes: 'Sparkling · 250ml',
+        desc: 'A double ristretto layered over house tonic and kaffir lime, built on ice for a bright, bittersweet lift. Served tall, unstirred, with the layers intact.',
+        img: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1100&q=80' },
+      { title: 'Toraja White Velvet', cat: 'Espresso Bar', price: 'IDR 48K', notes: 'Milk · 220ml',
+        desc: 'A creamy palm-sugar latte finished with a dense micro-foam so smooth it reads as velvet. Toraja Sapan espresso, whole milk, no additional sweetener needed.',
+        img: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=1100&q=80' },
+      { title: 'Java Preanger Honey Batch', cat: 'Manual Brew', price: 'IDR 46K', notes: 'Black · 250ml',
+        desc: 'A sweet, anaerobic honey-processed lot from the Preanger highlands, brewed as a full immersion. Stone fruit, brown sugar and a long, syrupy finish.',
+        img: 'https://images.unsplash.com/photo-1503481766315-7a586b20f66d?auto=format&fit=crop&w=1100&q=80' },
+      { title: 'Banjarbaru Smoked Mocha', cat: 'Espresso Bar', price: 'IDR 50K', notes: 'Milk · 240ml',
+        desc: 'Dark cacao and oak-smoked espresso, steamed milk, a whisper of sea salt. Rich and lightly smoky — our house tribute to the roastery floor.',
+        img: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=1100&q=80' },
+      { title: 'Sacred Flores Cold Brew', cat: 'Manual Brew', price: 'IDR 43K', notes: 'Cold · 18-hour · 240ml',
+        desc: 'Flores Bajawa cold-brewed for eighteen hours, then infused with vanilla bean and citrus peel. Floral, clean and gently sweet, served over ice.',
+        img: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1100&q=80' }
+    ];
+
+    var menuGrid = doc.getElementById('menuGrid');
+
+    function esc(s) { return String(s).replace(/"/g, '&quot;'); }
+
+    /* decorative bean shown behind any image while it loads / if it fails */
+    var BEAN_FALLBACK =
+      '<svg class="absolute inset-0 m-auto w-16 h-16 opacity-30 text-warm-gold pointer-events-none" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">' +
+      '<ellipse cx="16" cy="16" rx="8.5" ry="11"/><path d="M16 5C11.5 11 20.5 21 16 27" stroke-linecap="round"/></svg>';
+
+    function cardMarkup(item) {
+      return '' +
+        '<li class="menu-item" data-cat="' + item.cat + '">' +
+          '<button class="menu-card menu-surface group text-left w-full rounded-2xl overflow-hidden flex flex-col h-full transition-colors" ' +
+            'style="color:#0F0F0F" ' +
+            'data-title="' + esc(item.title) + '" data-cat="' + esc(item.cat) + '" data-price="' + esc(item.price) + '" data-notes="' + esc(item.notes) + '" ' +
+            'data-desc="' + esc(item.desc) + '" data-img="' + esc(item.img) + '" aria-haspopup="dialog">' +
+            '<span class="zoom-wrap block relative h-48 bean-bg">' +
+              BEAN_FALLBACK +
+              '<img src="' + item.img + '" alt="' + esc(item.title) + '" loading="lazy" class="relative w-full h-full object-cover" onerror="this.remove()" />' +
+              '<span class="absolute top-3 left-3 z-10 text-[10px] uppercase tracking-[0.14em] glass-dark text-parchment px-2.5 py-1 rounded-full">' + item.cat + '</span>' +
+            '</span>' +
+            '<span class="p-6 flex flex-col flex-1">' +
+              '<span class="flex items-baseline justify-between gap-3">' +
+                '<span class="font-display text-xl leading-tight group-hover:text-earth transition-colors" style="color:#0F0F0F">' + item.title + '</span>' +
+                '<span class="font-display text-sm shrink-0 rounded-full px-2.5 py-0.5" style="color:#9a6f16;border:1px solid rgba(212,175,55,0.5)">' + item.price + '</span>' +
+              '</span>' +
+              '<span class="mt-2 text-sm leading-relaxed clamp-3" style="color:rgba(15,15,15,0.72)">' + item.desc + '</span>' +
+              '<span class="mt-auto pt-4 text-[11px] uppercase tracking-[0.14em] inline-flex items-center gap-2" style="color:rgba(15,15,15,0.55)">View detail' +
+                '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>' +
+              '</span>' +
+            '</span>' +
+          '</button>' +
+        '</li>';
+    }
+    menuGrid.innerHTML = MENU.map(cardMarkup).join('');
+
+    /* Category tabs */
+    var catBtns = Array.prototype.slice.call(doc.querySelectorAll('#menuTabs .cat-btn'));
+    catBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        catBtns.forEach(function (b) { b.setAttribute('data-active', 'false'); });
+        btn.setAttribute('data-active', 'true');
+        var cat = btn.getAttribute('data-cat');
+        Array.prototype.slice.call(doc.querySelectorAll('#menuGrid .menu-item')).forEach(function (li) {
+          var show = (cat === 'All' || li.getAttribute('data-cat') === cat);
+          li.style.display = show ? '' : 'none';
+          if (show && window.gsap && !reduce) {
+            gsap.fromTo(li, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', clearProps: 'transform' });
+          }
+        });
+        if (window.ScrollTrigger) ScrollTrigger.refresh();
+      });
+    });
+
+    /* ============================================================
+       MENU MODAL (CSS-driven visibility)
+    ============================================================ */
+    var modal = doc.getElementById('menuModal');
+    var modalBackdrop = doc.getElementById('modalBackdrop');
+    var modalClose = doc.getElementById('modalClose');
+    var lastFocused = null;
+
+    function openModal(data) {
+      var mImg = doc.getElementById('modalImg');
+      mImg.style.opacity = '0';
+      mImg.alt = data.title;
+      mImg.src = data.img;
+      if (mImg.complete && mImg.naturalWidth > 0) mImg.style.opacity = '1';
+      doc.getElementById('modalCat').textContent = data.cat;
+      doc.getElementById('modalTitle').textContent = data.title;
+      doc.getElementById('modalDesc').textContent = data.desc;
+      doc.getElementById('modalNotes').textContent = data.notes;
+      doc.getElementById('modalPrice').textContent = data.price;
+      lastFocused = doc.activeElement;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      if (window.lenisInstance) window.lenisInstance.stop();
+      doc.body.style.overflow = 'hidden';
+      modalClose.focus();
+    }
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      if (window.lenisInstance) window.lenisInstance.start();
+      doc.body.style.overflow = '';
+      if (lastFocused) lastFocused.focus();
+    }
+    menuGrid.addEventListener('click', function (e) {
+      var card = e.target.closest('.menu-card');
+      if (!card) return;
+      openModal({
+        img: card.getAttribute('data-img'), cat: card.getAttribute('data-cat'),
+        title: card.getAttribute('data-title'), desc: card.getAttribute('data-desc'),
+        notes: card.getAttribute('data-notes'), price: card.getAttribute('data-price')
+      });
+    });
+    modalBackdrop.addEventListener('click', closeModal);
+    modalClose.addEventListener('click', closeModal);
+    doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
+
+    /* ============================================================
+       CRAFT — ROASTING STAGE SELECTOR
+    ============================================================ */
+    var stageTabs = Array.prototype.slice.call(doc.querySelectorAll('#stageTabs .stage-btn'));
+    var stageImg = doc.getElementById('stageImg');
+    var stageTitle = doc.getElementById('stageTitle');
+    var stageDesc = doc.getElementById('stageDesc');
+    var stagePanel = doc.getElementById('stagePanel');
+
+    function selectStage(idx) {
+      stageTabs.forEach(function (t, i) {
+        var on = i === idx;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      var btn = stageTabs[idx];
+      stagePanel.setAttribute('aria-labelledby', btn.id);
+      var newImg = btn.getAttribute('data-img');
+      var newTitle = btn.getAttribute('data-title').replace(/&amp;/g, '&');
+      var newDesc = btn.getAttribute('data-desc');
+
+      stageImg.src = newImg;
+      stageImg.alt = newTitle;
+      stageTitle.textContent = newTitle;
+      stageDesc.textContent = newDesc;
+
+      if (window.gsap && !reduce) {
+        gsap.fromTo([stageImg, stageTitle, stageDesc],
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'expo.out', overwrite: true });
+      }
+    }
+    stageTabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { selectStage(i); });
+      t.addEventListener('keydown', function (e) {
+        var n = null;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') n = (i + 1) % stageTabs.length;
+        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') n = (i - 1 + stageTabs.length) % stageTabs.length;
+        if (n !== null) { e.preventDefault(); stageTabs[n].focus(); selectStage(n); }
+      });
+    });
+
+    /* ============================================================
+       RESERVATION COMPONENT
+    ============================================================ */
+    var slotBtns = Array.prototype.slice.call(doc.querySelectorAll('#slotGroup .slot-btn'));
+    slotBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        slotBtns.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+      });
+    });
+
+    var guestCount = doc.getElementById('guestCount');
+    var guests = 2;
+    doc.getElementById('guestMinus').addEventListener('click', function () { guests = Math.max(1, guests - 1); guestCount.textContent = guests; });
+    doc.getElementById('guestPlus').addEventListener('click', function () { guests = Math.min(14, guests + 1); guestCount.textContent = guests; });
+
+    var rdate = doc.getElementById('rdate');
+    (function () {
+      var t = new Date(); t.setDate(t.getDate() + 1);
+      rdate.min = new Date().toISOString().split('T')[0];
+      rdate.value = t.toISOString().split('T')[0];
+    })();
+
+    var toastEl = doc.getElementById('toast');
+    var toastTimer = null;
+    function toast(msg) {
+      toastEl.textContent = msg;
+      toastEl.style.opacity = '1';
+      toastEl.style.transform = 'translate(-50%, 0)';
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () {
+        toastEl.style.opacity = '0';
+        toastEl.style.transform = 'translate(-50%, 6rem)';
+      }, 4200);
+    }
+
+    doc.getElementById('reserveForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var err = doc.getElementById('reserveError');
+      var name = doc.getElementById('rname').value.trim();
+      var time = doc.getElementById('rtime').value;
+      var seat = (slotBtns.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || {}).textContent || 'Any';
+      var note = doc.getElementById('rnote').value.trim();
+      if (!name || !rdate.value || !time) {
+        err.hidden = false;
+        err.textContent = 'Please add your name, a date and a time.';
+        return;
+      }
+      err.hidden = true;
+      var msg = 'Halo Pusaka Coffee Roasters, saya ingin memesan meja privat.%0A%0A' +
+                'Nama: ' + encodeURIComponent(name) + '%0A' +
+                'Tanggal: ' + rdate.value + '%0A' +
+                'Waktu: ' + encodeURIComponent(time) + '%0A' +
+                'Jumlah tamu: ' + guests + '%0A' +
+                'Preferensi tempat duduk: ' + encodeURIComponent(seat) +
+                (note ? ('%0APermintaan khusus: ' + encodeURIComponent(note)) : '');
+      toast('Opening WhatsApp to confirm your reservation…');
+      window.open('https://wa.me/6281234567890?text=' + msg, '_blank', 'noopener');
+    });
+
+    /* ============================================================
+       LENIS SMOOTH SCROLL
+    ============================================================ */
+    var lenis = null;
+    if (window.Lenis && !reduce) {
+      lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true });
+      window.lenisInstance = lenis;
+      (function raf(time) { lenis.raf(time); requestAnimationFrame(raf); })(0);
+    }
+
+    doc.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var id = link.getAttribute('href');
+        if (id.length < 2) return;
+        var target = doc.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        if (lenis) lenis.scrollTo(target, { offset: -80, duration: 1.2 });
+        else target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    /* ============================================================
+       MOBILE MENU
+    ============================================================ */
+    var toggle = doc.getElementById('menuToggle');
+    var mobileMenu = doc.getElementById('mobileMenu');
+    toggle.addEventListener('click', function () {
+      var willOpen = mobileMenu.hasAttribute('hidden');
+      if (willOpen) mobileMenu.removeAttribute('hidden'); else mobileMenu.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', String(willOpen));
+      toggle.setAttribute('aria-label', willOpen ? 'Close menu' : 'Open menu');
+    });
+    mobileMenu.querySelectorAll('[data-close]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileMenu.setAttribute('hidden', '');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ============================================================
+       NAV HIDE ON SCROLL-DOWN + BACK-TO-TOP VISIBILITY
+    ============================================================ */
+    var nav = doc.getElementById('nav');
+    var toTop = doc.getElementById('toTop');
+    var lastY = 0;
+    function onScroll(y) {
+      nav.style.transform = (y > lastY && y > 260) ? 'translateY(-140%)' : 'translateY(0)';
+      lastY = y;
+      var show = y > window.innerHeight * 0.9;
+      toTop.style.opacity = show ? '1' : '0';
+      toTop.style.transform = show ? 'translateY(0)' : 'translateY(1rem)';
+      toTop.style.pointerEvents = show ? 'auto' : 'none';
+    }
+    if (lenis) lenis.on('scroll', function (e) { onScroll(e.scroll); });
+    else window.addEventListener('scroll', function () { onScroll(window.scrollY); }, { passive: true });
+
+    function goTop() { if (lenis) lenis.scrollTo(0, { duration: 1.3 }); else window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    toTop.addEventListener('click', goTop);
+    doc.getElementById('backTop').addEventListener('click', goTop);
+
+    /* ============================================================
+       THREE.JS — "THE GOLDEN THREAD"
+       A single glowing golden bean that glides / rotates / scales
+       across all 7 slides as the scroll progresses, plus a field
+       of warm golden ambient dust.
+    ============================================================ */
+    (function initGoldenThread() {
+      if (reduce || !window.THREE) return;
+      var canvas = doc.getElementById('bg-canvas');
+      var renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+      } catch (err) { canvas.style.display = 'none'; return; }
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      var scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x0f0f0f, 0.03);
+
+      var camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 0, 12);
+
+      /* ---- Lighting: warm, jewellery-case feel ---- */
+      scene.add(new THREE.AmbientLight(0x201810, 0.9));
+      var key = new THREE.DirectionalLight(0xfff0d8, 1.15); key.position.set(5, 6, 8); scene.add(key);
+      var rim = new THREE.DirectionalLight(0xF3C649, 0.9); rim.position.set(-6, -2, -4); scene.add(rim);
+      var beanLight = new THREE.PointLight(0xF3C649, 2.2, 40, 2); scene.add(beanLight);
+      var amber = new THREE.PointLight(0xD4AF37, 1.1, 30, 2); amber.position.set(-4, 3, 6); scene.add(amber);
+
+      /* ---- The golden bean ---- */
+      var group = new THREE.Group();
+      scene.add(group);
+
+      var beanGeo = new THREE.SphereGeometry(1, 64, 48);
+      beanGeo.scale(0.68, 1.0, 0.55);
+      var pos = beanGeo.attributes.position;
+      var v = new THREE.Vector3();
+      for (var i = 0; i < pos.count; i++) {
+        v.fromBufferAttribute(pos, i);
+        /* carve an S-shaped seam near the x = 0 plane */
+        var seam = Math.abs(v.x + Math.sin(v.y * 1.8) * 0.16);
+        if (seam < 0.14) {
+          var k = 1 - (seam / 0.14);
+          v.multiplyScalar(1 - 0.16 * k * k);
+        }
+        pos.setXYZ(i, v.x, v.y, v.z);
+      }
+      beanGeo.computeVertexNormals();
+
+      var beanMat = new THREE.MeshStandardMaterial({
+        color: 0xD4AF37, metalness: 0.6, roughness: 0.33,
+        emissive: 0xF3C649, emissiveIntensity: 0.42
+      });
+      var bean = new THREE.Mesh(beanGeo, beanMat);
+      group.add(bean);
+
+      /* soft additive glow shell */
+      var glowMat = new THREE.MeshBasicMaterial({ color: 0xF3C649, transparent: true, opacity: 0.10, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.BackSide });
+      var glow = new THREE.Mesh(beanGeo.clone(), glowMat);
+      glow.scale.setScalar(1.35);
+      group.add(glow);
+
+      /* radial halo sprite */
+      var haloCanvas = doc.createElement('canvas'); haloCanvas.width = haloCanvas.height = 256;
+      var hx = haloCanvas.getContext('2d');
+      var grad = hx.createRadialGradient(128, 128, 0, 128, 128, 128);
+      grad.addColorStop(0, 'rgba(243,198,73,0.55)');
+      grad.addColorStop(0.4, 'rgba(212,175,55,0.18)');
+      grad.addColorStop(1, 'rgba(212,175,55,0)');
+      hx.fillStyle = grad; hx.fillRect(0, 0, 256, 256);
+      var haloTex = new THREE.CanvasTexture(haloCanvas);
+      var halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: haloTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+      halo.scale.setScalar(9);
+      group.add(halo);
+
+      /* ---- Golden ambient dust ---- */
+      var dustCount = isMobile ? 320 : 780;
+      var dGeo = new THREE.BufferGeometry();
+      var dPos = new Float32Array(dustCount * 3);
+      var dSpeed = new Float32Array(dustCount);
+      for (var d = 0; d < dustCount; d++) {
+        dPos[d * 3] = (Math.random() - 0.5) * 44;
+        dPos[d * 3 + 1] = (Math.random() - 0.5) * 32;
+        dPos[d * 3 + 2] = (Math.random() - 0.5) * 26 - 4;
+        dSpeed[d] = 0.15 + Math.random() * 0.5;
+      }
+      dGeo.setAttribute('position', new THREE.BufferAttribute(dPos, 3));
+      var dustMat = new THREE.PointsMaterial({ color: 0xF3C649, size: 0.055, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, depthWrite: false });
+      var dust = new THREE.Points(dGeo, dustMat);
+      scene.add(dust);
+
+      /* ---- Per-slide keyframes for the thread ---- */
+      var KF = [
+        { p: [3.1, 0.2, -0.5], r: [0.35, -0.5, 0.12], s: 1.5 },   /* 1 hero */
+        { p: [-4.6, -0.4, -2.2], r: [0.1, 0.7, -0.22], s: 1.12 }, /* 2 philosophy */
+        { p: [0.2, 0.4, -3.0], r: [0.22, 1.6, 0.15], s: 1.35 },   /* 3 origins */
+        { p: [4.3, -0.3, -1.4], r: [-0.2, 2.5, 0.18], s: 1.5 },   /* 4 craft */
+        { p: [-5.6, 0.6, -4.2], r: [0.15, 3.3, -0.12], s: 0.92 }, /* 5 menu */
+        { p: [5.2, -0.7, -3.0], r: [0.3, 4.1, 0.22], s: 1.12 },   /* 6 gallery */
+        { p: [0, 0.9, -0.8], r: [0.12, 5.0, 0.0], s: 1.75 }       /* 7 visit */
+      ];
+      function smooth(t) { return t * t * (3 - 2 * t); }
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      var scrollProgress = 0;
+      function updateProgress() {
+        var h = doc.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        var y = window.scrollY || h.scrollTop || 0;
+        scrollProgress = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
+      }
+      updateProgress();
+      if (lenis) lenis.on('scroll', updateProgress);
+      window.addEventListener('scroll', updateProgress, { passive: true });
+
+      var mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+      window.addEventListener('mousemove', function (e) {
+        mouse.tx = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouse.ty = (e.clientY / window.innerHeight - 0.5) * 2;
+      }, { passive: true });
+      window.addEventListener('deviceorientation', function (e) {
+        if (e.gamma == null) return;
+        mouse.tx = Math.max(-1, Math.min(1, e.gamma / 30));
+        mouse.ty = Math.max(-1, Math.min(1, (e.beta - 45) / 30));
+      }, true);
+
+      var clock = new THREE.Clock();
+      var running = true;
+
+      function frame() {
+        if (!running) return;
+        var t = clock.getElapsedTime();
+
+        mouse.x += (mouse.tx - mouse.x) * 0.05;
+        mouse.y += (mouse.ty - mouse.y) * 0.05;
+
+        /* interpolate the thread across the 7 keyframes */
+        var f = scrollProgress * (KF.length - 1);
+        var idx = Math.min(KF.length - 2, Math.floor(f));
+        var lt = smooth(f - idx);
+        var a = KF[idx], b = KF[idx + 1];
+
+        var gx = lerp(a.p[0], b.p[0], lt) + mouse.x * 0.8;
+        var gy = lerp(a.p[1], b.p[1], lt) - mouse.y * 0.5 + Math.sin(t * 0.6) * 0.12;
+        var gz = lerp(a.p[2], b.p[2], lt);
+        group.position.set(
+          lerp(group.position.x, gx, 0.06),
+          lerp(group.position.y, gy, 0.06),
+          lerp(group.position.z, gz, 0.06)
+        );
+        group.rotation.x = lerp(group.rotation.x, lerp(a.r[0], b.r[0], lt), 0.05);
+        group.rotation.z = lerp(group.rotation.z, lerp(a.r[2], b.r[2], lt), 0.05);
+        group.rotation.y = lerp(a.r[1], b.r[1], lt) + t * 0.18;
+        var sc = lerp(a.s, b.s, lt);
+        group.scale.set(lerp(group.scale.x, sc, 0.06), lerp(group.scale.y, sc, 0.06), lerp(group.scale.z, sc, 0.06));
+
+        /* glow / light pulse */
+        var pulse = 0.9 + Math.sin(t * 1.4) * 0.12;
+        beanMat.emissiveIntensity = 0.38 * pulse + 0.06;
+        glowMat.opacity = 0.09 * pulse;
+        beanLight.position.copy(group.position);
+        beanLight.intensity = 2.0 * pulse + scrollProgress * 0.6;
+        halo.material.opacity = 0.55 * pulse;
+
+        /* dust drift, loosely orbiting the thread */
+        var dp = dust.geometry.attributes.position.array;
+        for (var i = 0; i < dustCount; i++) {
+          dp[i * 3 + 1] += dSpeed[i] * 0.006;
+          if (dp[i * 3 + 1] > 16) dp[i * 3 + 1] = -16;
+        }
+        dust.geometry.attributes.position.needsUpdate = true;
+        dust.rotation.y = t * 0.02 + mouse.x * 0.12;
+        dust.position.x = group.position.x * 0.15;
+        dust.position.y = -scrollProgress * 2;
+
+        camera.position.x += (mouse.x * 1.6 - camera.position.x) * 0.04;
+        camera.position.y += (-mouse.y * 1.1 - camera.position.y) * 0.04;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+
+      window.addEventListener('resize', function () {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+      doc.addEventListener('visibilitychange', function () {
+        running = !doc.hidden;
+        if (running) { clock.start(); requestAnimationFrame(frame); }
+      });
+      canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); running = false; });
+      canvas.addEventListener('webglcontextrestored', function () { running = true; requestAnimationFrame(frame); });
+    })();
+
+    /* ============================================================
+       GSAP — SCROLL CHOREOGRAPHY
+    ============================================================ */
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+    if (lenis) lenis.on('scroll', ScrollTrigger.update);
+
+    function setCountersFinal() {
+      doc.querySelectorAll('.counter').forEach(function (el) {
+        var n = parseFloat(el.getAttribute('data-count'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        el.textContent = (el.getAttribute('data-comma') ? n.toLocaleString('en-US') : n) + suffix;
+      });
+    }
+
+    var mm = gsap.matchMedia();
+
+    mm.add('(prefers-reduced-motion: reduce)', function () { setCountersFinal(); });
+
+    mm.add('(prefers-reduced-motion: no-preference)', function () {
+
+      /* 1 · Hero load-in */
+      var heroTl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+      heroTl
+        .from('.hero .mask-i', { yPercent: 118, duration: 1.15, stagger: 0.12 }, 0.15)
+        .from('[data-hero]', { opacity: 0, y: 24, duration: 0.9, stagger: 0.09 }, 0.5);
+
+      /* 2 · Philosophy line-by-line */
+      gsap.utils.toArray('#philosophy .mask').forEach(function (line) {
+        gsap.from(line.querySelector('.mask-i'), {
+          yPercent: 118, duration: 0.95, ease: 'expo.out',
+          scrollTrigger: { trigger: line, start: 'top 88%' }
+        });
+      });
+
+      /* 3 · Generic reveals */
+      gsap.utils.toArray('[data-reveal]').forEach(function (el) {
+        gsap.from(el, {
+          opacity: 0, y: 30, duration: 0.9, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 92%' }
+        });
+      });
+
+      /* 4 · Count-up */
+      gsap.utils.toArray('.counter').forEach(function (el) {
+        var target = parseFloat(el.getAttribute('data-count'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        var comma = !!el.getAttribute('data-comma');
+        var obj = { v: 0 };
+        gsap.to(obj, {
+          v: target, duration: 2, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 90%' },
+          onUpdate: function () {
+            var val = Math.round(obj.v);
+            el.textContent = (comma ? val.toLocaleString('en-US') : val) + suffix;
+          },
+          onComplete: function () {
+            el.textContent = (comma ? target.toLocaleString('en-US') : target) + suffix;
+          }
+        });
+      });
+
+      /* 5 · Origins cards */
+      gsap.from('[data-origin]', {
+        y: 50, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+        scrollTrigger: { trigger: '#origins .grid', start: 'top 82%' }
+      });
+
+      /* 6 · Menu cards */
+      gsap.from('#menuGrid .menu-item', {
+        y: 40, opacity: 0, duration: 0.65, stagger: 0.06, ease: 'power3.out',
+        scrollTrigger: { trigger: '#menuGrid', start: 'top 85%' }
+      });
+
+      /* 7 · Craft panel */
+      gsap.from('#craft .glass', {
+        y: 40, opacity: 0, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: '#craft', start: 'top 74%' }
+      });
+
+      /* 8 · Gallery parallax */
+      gsap.utils.toArray('[data-parallax-img]').forEach(function (img) {
+        var speed = parseFloat(img.getAttribute('data-speed')) || 12;
+        gsap.fromTo(img, { yPercent: -speed / 2 }, {
+          yPercent: speed / 2, ease: 'none',
+          scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      });
+
+      /* 9 · Footer headline */
+      gsap.from('#visit h2', {
+        y: 60, opacity: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '#visit', start: 'top 80%' }
+      });
+
+      /* 10 · Progress bar */
+      gsap.to('#progress', {
+        scaleX: 1, ease: 'none',
+        scrollTrigger: { trigger: doc.body, start: 'top top', end: 'bottom bottom', scrub: 0.3 }
+      });
+
+      /* 11 · 3D hover-tilt (origins + hero card) */
+      gsap.utils.toArray('.tilt-card, .tilt-strong').forEach(function (card) {
+        var strong = card.classList.contains('tilt-strong');
+        var amt = strong ? 16 : 11;
+        function move(e) {
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          gsap.to(card, { rotateY: px * amt, rotateX: -py * amt, duration: 0.5, ease: 'power2.out', transformPerspective: 1000 });
+        }
+        function leave() { gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.8, ease: 'expo.out' }); }
+        card.addEventListener('mousemove', move);
+        card.addEventListener('mouseleave', leave);
+      });
+
+      /* 12 · Magnetic buttons */
+      gsap.utils.toArray('.magnetic').forEach(function (btn) {
+        var label = btn.querySelector('.magnetic-label');
+        function move(e) {
+          var r = btn.getBoundingClientRect();
+          var x = (e.clientX - r.left - r.width / 2);
+          var y = (e.clientY - r.top - r.height / 2);
+          gsap.to(btn, { x: x * 0.3, y: y * 0.4, duration: 0.5, ease: 'power2.out' });
+          if (label) gsap.to(label, { x: x * 0.15, y: y * 0.2, duration: 0.5, ease: 'power2.out' });
+        }
+        function leave() {
+          gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+          if (label) gsap.to(label, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+        }
+        btn.addEventListener('mousemove', move);
+        btn.addEventListener('mouseleave', leave);
+      });
+    });
+
+    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  })();
+  </script>
+</body>
+</html>
