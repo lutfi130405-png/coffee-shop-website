@@ -1,0 +1,264 @@
+/* ============================================================
+   MENU CARD HOVER ANIMATIONS — Smooth & Luxurious
+   ============================================================ */
+
+/* 1. BASE CARD ELEVATION + SHADOW ENHANCEMENT */
+.menu-card {
+  position: relative;
+  transition: 
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease;
+  box-shadow: 0 12px 34px -20px rgba(0, 0, 0, 0.35);
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 56px -12px rgba(243, 198, 73, 0.25), 
+              0 12px 34px -20px rgba(0, 0, 0, 0.4);
+  border-color: rgba(212, 175, 55, 0.6);
+}
+
+.menu-card:active {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -10px rgba(243, 198, 73, 0.15);
+}
+
+/* ============================================================
+   2. IMAGE ZOOM + OVERLAY GLOW
+   ============================================================ */
+
+.zoom-wrap {
+  overflow: hidden;
+  position: relative;
+}
+
+.zoom-wrap img {
+  transition: 
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s ease;
+  filter: brightness(1) saturate(1);
+}
+
+.menu-card:hover .zoom-wrap img {
+  transform: scale(1.12);
+  filter: brightness(1.05) saturate(1.08);
+}
+
+/* Golden glow overlay on hover */
+.zoom-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 100% 80% at 50% 50%,
+    rgba(243, 198, 73, 0.15) 0%,
+    rgba(243, 198, 73, 0.05) 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-card:hover .zoom-wrap::after {
+  opacity: 1;
+}
+
+/* ============================================================
+   3. CATEGORY BADGE ANIMATION
+   ============================================================ */
+
+.zoom-wrap .glass-dark {
+  transition: 
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.menu-card:hover .zoom-wrap .glass-dark {
+  transform: scale(1.05) translateY(-2px);
+  background: rgba(18, 18, 18, 0.85);
+  border-color: rgba(243, 198, 73, 0.4);
+}
+
+/* ============================================================
+   4. TITLE + PRICE ANIMATION
+   ============================================================ */
+
+.menu-card h3 {
+  transition: color 0.35s ease;
+  color: #0F0F0F;
+}
+
+.menu-card:hover h3 {
+  color: #8C6046;
+}
+
+/* Price badge glow */
+.menu-card .font-display.text-sm {
+  transition: 
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+  box-shadow: 0 0 0 rgba(212, 175, 55, 0);
+}
+
+.menu-card:hover .font-display.text-sm {
+  color: #D4AF37;
+  border-color: rgba(212, 175, 55, 0.8);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+}
+
+/* ============================================================
+   5. DESCRIPTION TEXT FADE IN
+   ============================================================ */
+
+.menu-card .clamp-3 {
+  transition: 
+    color 0.35s ease,
+    opacity 0.35s ease;
+  opacity: 0.9;
+  color: rgba(15, 15, 15, 0.72);
+}
+
+.menu-card:hover .clamp-3 {
+  opacity: 1;
+  color: rgba(15, 15, 15, 0.85);
+}
+
+/* ============================================================
+   6. CTA TEXT + ICON ANIMATION
+   ============================================================ */
+
+.menu-card .inline-flex.items-center.gap-2 {
+  transition: 
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  color: rgba(15, 15, 15, 0.55);
+}
+
+.menu-card:hover .inline-flex.items-center.gap-2 {
+  color: rgba(15, 15, 15, 0.75);
+  transform: translateX(3px);
+}
+
+/* Arrow icon slide animation */
+.menu-card svg {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-card:hover svg {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   7. FULL CARD SHINE EFFECT (Optional Premium Touch)
+   ============================================================ */
+
+.menu-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 5;
+}
+
+.menu-card:hover::before {
+  left: 100%;
+}
+
+/* ============================================================
+   8. FOCUS STATES (Accessibility)
+   ============================================================ */
+
+.menu-card:focus-visible {
+  outline: 2px solid #F3C649;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.menu-card:focus-visible:hover {
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   9. REDUCED MOTION SUPPORT
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-card,
+  .zoom-wrap img,
+  .menu-card h3,
+  .menu-card .font-display.text-sm,
+  .menu-card .clamp-3,
+  .menu-card .inline-flex.items-center.gap-2,
+  .menu-card svg,
+  .zoom-wrap .glass-dark,
+  .zoom-wrap::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .menu-card:hover {
+    transform: none;
+    box-shadow: 0 12px 34px -20px rgba(0, 0, 0, 0.35);
+  }
+
+  .menu-card::before {
+    display: none;
+  }
+}
+
+/* ============================================================
+   10. TABLET/MOBILE ADJUSTMENTS
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .menu-card {
+    /* Reduce hover lift on mobile to conserve space */
+  }
+
+  .menu-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .menu-card:active {
+    transform: translateY(-2px);
+  }
+
+  /* Slightly faster animations on touch devices */
+  .menu-card,
+  .zoom-wrap img,
+  .menu-card h3,
+  .menu-card .font-display.text-sm,
+  .menu-card .clamp-3 {
+    transition-duration: 0.25s;
+  }
+}
+
+/* ============================================================
+   11. DARK MODE ENHANCEMENTS (Optional)
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+  .menu-card:hover {
+    box-shadow: 
+      0 28px 56px -12px rgba(243, 198, 73, 0.3), 
+      0 12px 34px -20px rgba(0, 0, 0, 0.6);
+  }
+
+  .menu-card:hover .font-display.text-sm {
+    box-shadow: 0 0 16px rgba(243, 198, 73, 0.4);
+  }
+}
